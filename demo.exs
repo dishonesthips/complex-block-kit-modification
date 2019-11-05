@@ -8,8 +8,14 @@ defmodule Project.Utils do
 end
 
 defmodule Project.Demo do
+  # acts as a blueprint for the block-kit message you plan to build
+  # supports blocks that need to be updated as well as ones that don't require any modifications
+  # (which appear in all caps with an underscore at the beginning to differentiate)
   @update_blocks ["title_block", "_DIVIDER", "priority_block", "time_block"]
 
+  # lay out the blocks you need as attributes
+  # not necessary as they can be hard coded into the map function
+  # but this is better practice since it allows them to be used elsewhere
   @title_block %{
     type: "input",
     element: %{
@@ -91,6 +97,7 @@ defmodule Project.Demo do
     type: "divider"
   }
 
+  # a mapping from block_id to anonymous functions that modify the blocks
   def update_map() do
     %{
       "title_block" => fn issue_data ->
@@ -121,6 +128,8 @@ defmodule Project.Demo do
     }
   end
 
+  def run_demo(), do: fake_data() |> build_message()
+
   def fake_data() do
     %{
       "priority_data" => "priority_value",
@@ -129,10 +138,12 @@ defmodule Project.Demo do
     }
   end
 
-  def run_demo(issue_data) do
+  # runs through the blueprint, modifying the blocks one by one
+  # outputs completed block-kit message
+  def build_message(data) do
     update_map = update_map()
     blueprint = @update_blocks
 
-    for block_id <- blueprint, do: update_map[block_id].(issue_data)
+    for block_id <- blueprint, do: update_map[block_id].(data)
   end
 end
