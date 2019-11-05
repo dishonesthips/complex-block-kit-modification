@@ -105,7 +105,7 @@ defmodule Project.Demo do
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_value,
-          data["title_value"]
+          data["title_data"]
         )
       end,
       "priority_block" => fn data ->
@@ -113,7 +113,7 @@ defmodule Project.Demo do
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_option,
-          data["priority_value"]
+          data["priority_data"]
         )
       end,
       "time_block" => fn data ->
@@ -121,7 +121,7 @@ defmodule Project.Demo do
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_value,
-          data["time_value"]
+          data["time_data"]
         )
       end,
       "_DIVIDER" => fn _ -> @_DIVIDER end
@@ -132,9 +132,9 @@ defmodule Project.Demo do
 
   def fake_data() do
     %{
-      "priority_data" => "priority_value",
-      "time_data" => "time_value",
-      "title_data" => "title_value"
+      "priority_data" => "priority_input",
+      "time_data" => "time_input",
+      "title_data" => "title_input"
     }
   end
 
