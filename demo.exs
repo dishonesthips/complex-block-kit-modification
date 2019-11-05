@@ -100,28 +100,28 @@ defmodule Project.Demo do
   # a mapping from block_id to anonymous functions that modify the blocks
   def update_map() do
     %{
-      "title_block" => fn issue_data ->
+      "title_block" => fn data ->
         @title_block
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_value,
-          issue_data["title_value"]
+          data["title_value"]
         )
       end,
-      "priority_block" => fn issue_data ->
+      "priority_block" => fn data ->
         @priority_block
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_option,
-          issue_data["priority_value"]
+          data["priority_value"]
         )
       end,
-      "time_block" => fn issue_data ->
+      "time_block" => fn data ->
         @time_block
         |> Project.Utils.put_kv_in(
           [:element],
           :initial_value,
-          issue_data["time_value"]
+          data["time_value"]
         )
       end,
       "_DIVIDER" => fn _ -> @_DIVIDER end
